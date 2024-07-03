@@ -7,13 +7,15 @@
         <div class="col-6">
             @include('shared.SubmitIdeas')
             <hr>
-            @foreach ($ideas as $idea)
+            @forelse ($ideas as $idea)
             <div class="mt-3">
                 @include('shared.IdeaCard')
             </div>
-            @endforeach
+            @empty
+                <p>No result found </p>
+            @endforelse
             <div class="mt-3">
-            {{$ideas->links()}}
+            {{$ideas->withQueryString()->links()}}
             </div>
             
         </div>

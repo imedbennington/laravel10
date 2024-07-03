@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
@@ -28,7 +29,12 @@ Route::get('/profile', function () {
 Route::get('/feed', function () {
     return view('feed');
 });*/
+Route::middleware('web')->group(function () {
+    // Include authentication routes
+    require __DIR__.'/authRoutes/AuthRoutes.php';
 
+    // Other routes can go here
+});
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 /*
@@ -56,8 +62,5 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.'], function() {
     Route::post('/{idea}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 });
 
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/register', [AuthController::class, 'store']);
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/login', [AuthController::class, 'authenticate']);
+Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
+//Route::resource('ideas',IdeaController::class)->except('index');
