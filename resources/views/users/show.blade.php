@@ -9,7 +9,7 @@
 
         <div class="col-6">
             <div class="mt-3">
-                @include('users.userCard')
+                @include('users.Usercard')
             </div>
 
             @include('shared.SubmitIdeas')

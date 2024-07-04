@@ -61,6 +61,6 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.'], function() {
     Route::delete('/{idea}', [IdeaController::class, 'destroy'])->name('destroy')->middleware('auth');
     Route::post('/{idea}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
 });
-
+Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
 Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
 //Route::resource('ideas',IdeaController::class)->except('index');
