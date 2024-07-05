@@ -66,4 +66,7 @@ Route::get('profile',[UserController::class, 'profile'])->name('profile')->middl
 Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
 Route::post('users/{user}/follow',[FollowerController::class,'follow'])->middleware('auth')->name('users.follow');
 Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->middleware('auth')->name('users.unfollow');
+Route::get('/terms',function(){
+    return view('terms');
+})->name('terms');
 //Route::resource('ideas',IdeaController::class)->except('index');

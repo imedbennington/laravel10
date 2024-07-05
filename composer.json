@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "*",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
@@ -63,6 +64,14 @@
             "pestphp/pest-plugin": true
         }
     },
+
+    "repositories": [
+        {
+            "type": "path",
+            "url": "vendor/barryvdh/laravel-debugbar"
+        }
+    ],
+
     "minimum-stability": "stable",
     "prefer-stable": true
 }

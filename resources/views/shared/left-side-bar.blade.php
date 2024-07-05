@@ -3,7 +3,9 @@
                 <div class="card-body pt-3">
                     <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="#">Home</a>
+                        
+                            <a class="nav-link {{ Request::is('/') ? 'text-white bg-primary rounded' : '' }}" href="{{ route('dashboard') }}">Home</a>
+                        
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Explore</a>
@@ -12,7 +14,7 @@
                             <a class="nav-link" href="#">Feed</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Terms</a>
+                        <a class="nav-link {{ Request::is('terms') ? 'text-white bg-primary rounded' : '' }}" href="{{ route('terms') }}">Terms</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Support</a>

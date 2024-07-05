@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Mail;
 use Hash;
 class AuthController extends Controller
 {
@@ -22,11 +23,14 @@ class AuthController extends Controller
         ]);
     
         // Create a new user with the validated data
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
+
+        Mail::to($user->email)->send(new WelcomeEmail($user));
+
     
         // Redirect to the dashboard with a success message
         return redirect()->route('dashboard')->with('success', 'Account created!');
