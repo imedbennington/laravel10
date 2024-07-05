@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\AuthController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\FollowerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,4 +64,6 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.'], function() {
 });
 Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
 Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
+Route::post('users/{user}/follow',[FollowerController::class,'follow'])->middleware('auth')->name('users.follow');
+Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->middleware('auth')->name('users.unfollow');
 //Route::resource('ideas',IdeaController::class)->except('index');

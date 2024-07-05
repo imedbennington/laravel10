@@ -23,7 +23,6 @@
             @empty
                 <p>No result found</p>
             @endforelse
-
             <div class="mt-3">
                 {{$ideas->withQueryString()->links()}}
             </div>
@@ -32,6 +31,7 @@
         <div class="col-3">
             @include('shared.search-bar')
             @include('shared.follow-box')
+
         </div>
     </div>
 </div>

@@ -10,7 +10,6 @@
                                     <span class="fs-6 text-muted">{{$user->email}}</span>
                                 </div>
                             </div>
-
                             @auth
                                 @if(Auth()->id() == $user->id)
                             <div>
@@ -37,8 +36,19 @@
                             @auth
 
                             @if(Auth()->id() !== $user->id)
+                            <form action="{{route('users.follow', $user->id)}}" method="post">
+                                @csrf
                             <div class="mt-3">
-                                <button class="btn btn-primary btn-sm"> Follow </button>
+                                <button type="submit" class="btn btn-primary btn-sm"> Follow </button>
+                            </div>
+                            </form>
+                            <div>
+                            <form action="{{ route('users.unfollow', $user->id) }}" method="POST">
+                                @csrf
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
+                                </div>
+                            </form>
                             </div>
                             @endif
                             @endauth
