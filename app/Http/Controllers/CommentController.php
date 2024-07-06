@@ -16,6 +16,6 @@ class CommentController extends Controller
         $comment->content = request()->get('content');
         $comment->save();
 
-        return redirect()->route('idea.show', $idea)->with('success', 'comment created !');
+        return redirect()->route('ideas.show', $idea)->with('success', 'comment created !');
     }
 }
