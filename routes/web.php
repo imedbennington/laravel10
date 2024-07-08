@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\IdeasLikesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -61,11 +62,17 @@ Route::group(['prefix' => 'ideas', 'as' => 'ideas.'], function() {
     Route::put('/{idea}', [IdeaController::class, 'update'])->name('update')->middleware('auth');
     Route::delete('/{idea}', [IdeaController::class, 'destroy'])->name('destroy')->middleware('auth');
     Route::post('/{idea}/comments', [CommentController::class, 'store'])->name('comments.store')->middleware('auth');
+    Route::post('{idea}/like', [IdeasLikesController::class, 'like'])->middleware('auth')->name('like');
+    Route::post('{idea}/unlike', [IdeasLikesController::class, 'unlike'])->middleware('auth')->name('unlike');
 });
+
+
 Route::get('profile',[UserController::class, 'profile'])->name('profile')->middleware('auth');
 Route::resource('users',UserController::class)->only('show','edit','update')->middleware('auth');
 Route::post('users/{user}/follow',[FollowerController::class,'follow'])->middleware('auth')->name('users.follow');
 Route::post('users/{user}/unfollow',[FollowerController::class,'unfollow'])->middleware('auth')->name('users.unfollow');
+
+
 Route::get('/terms',function(){
     return view('terms');
 })->name('terms');

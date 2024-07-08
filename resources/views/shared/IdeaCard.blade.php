@@ -42,9 +42,27 @@
         </p>
         @endif
         <div class="d-flex justify-content-between">
+
+        <form action="{{ route('ideas.like', $idea->id) }}" method="post">
+            @csrf
             <div>
-                <a href="#" class="fw-light nav-link fs-6"><span class="fas fa-heart me-1"></span> {{ $idea->likes }}</a>
+                <button type="submit" class="fw-light nav-link fs-6">
+                    <span class="fas fa-heart me-1"></span> 
+                    {{ $idea->likes()->count() }}
+                </button>
             </div>
+        </form>
+
+        <form action="{{ route('ideas.unlike', $idea->id) }}" method="post">
+            @csrf
+            <div>
+                <button type="submit" class="fw-light nav-link fs-6">
+                    <span class="far fa-heart me-1"></span> 
+                    {{ $idea->likes()->count() }}
+                </button>
+            </div>
+        </form>
+
             <div>
                 <span class="fs-6 fw-light text-muted"><span class="fas fa-clock"></span> {{ $idea->created_at }}</span>
             </div>
